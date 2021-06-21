@@ -1,7 +1,7 @@
 defmodule Cap.Abac do
 	
 	def apply_abac(req, resource)do
-		list_check = [:show, :edit, :update]
+		list_check = [:show, :edit, :update, :delete]
 		if req.plug_opts in list_check do
 			module = req.plug
 			has_abac = Keyword.has_key?(module.__info__(:functions), :abac)
