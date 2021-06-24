@@ -123,5 +123,17 @@ defmodule ThetaWeb.CMS.ArticleController do
 end
 ```
 
+Implement Plug.Exception for Cap.ErrorHandler
+```elixir
+defimpl Plug.Exception, for: Cap.ErrorHandler do
+  def status(exception) do
+    case Integer.parse(exception.message) do
+      :error -> 404
+      {int, _} -> 403
+    end
+  end
+end
+```
+
 
 
