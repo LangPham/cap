@@ -2,7 +2,7 @@
 ![Hex.pm](https://img.shields.io/hexpm/l/cap)
 ![Hex.pm](https://img.shields.io/hexpm/v/cap)
 
-**TODO: Add description**
+Cap is Central Authentication Plug for Phoenix, access control library with Role-based access control (RBAC) and Attribute-based access control (ABAC)
 
 ## How to use
 

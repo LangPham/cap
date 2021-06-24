@@ -43,12 +43,13 @@ defmodule Cap.MixProject do
 	defp deps do
 		[
 			{:phoenix, "~> 1.5.7"},
+			{:ex_doc, "~> 0.24", only: :dev, runtime: false}
 		]
 	end
 	
 	defp docs do
 		[
-			main: "Gi", # The main page in the docs
+			main: "Cap", # The main page in the docs
 			source_url: @source_url,
 			homepage_url: @source_url,
 			logo: "guides/images/logo.svg",
