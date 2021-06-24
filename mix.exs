@@ -1,27 +1,61 @@
 defmodule Cap.MixProject do
-  use Mix.Project
-
-  def project do
-    [
-      app: :cap,
-      version: "0.1.0",
-      elixir: "~> 1.11",
-      start_permanent: Mix.env() == :prod,
-      deps: deps()
-    ]
-  end
-
-  # Run "mix help compile.app" to learn about applications.
-  def application do
-    [
-      extra_applications: [:logger],
-    ]
-  end
-
-  # Run "mix help deps" to learn about dependencies.
-  defp deps do
-    [
-      {:phoenix, "~> 1.5.7"},
-    ]
-  end
+	use Mix.Project
+	
+	@source_url "https://github.com/LangPham/cap"
+	@version "0.1.0"
+	
+	def project do
+		[
+			app: :cap,
+			version: @version,
+			elixir: "~> 1.11",
+			start_permanent: Mix.env() == :prod,
+			deps: deps(),
+			
+			# Hex
+			description: "Cap is Central Authentication Plug for Phoenix, access control library with Role-based access control (RBAC) and Attribute-based access control (ABAC)",
+			package: package(),
+			
+			# Docs
+			name: "Cap",
+			docs: docs()
+		]
+	end
+	
+	# Run "mix help compile.app" to learn about applications.
+	def application do
+		[
+			extra_applications: [:logger],
+		]
+	end
+	defp package do
+		[
+			files: ~w(lib mix.exs README* LICENSE .formatter.exs),
+			maintainers: ["LangPham"],
+			licenses: ["MIT"],
+			links: %{
+				"GitHub" => @source_url
+			}
+		]
+	end
+	
+	# Run "mix help deps" to learn about dependencies.
+	defp deps do
+		[
+			{:phoenix, "~> 1.5.7"},
+		]
+	end
+	
+	defp docs do
+		[
+			main: "Gi", # The main page in the docs
+			source_url: @source_url,
+			homepage_url: @source_url,
+			logo: "guides/images/logo.svg",
+			extras: [
+				"README.md",
+				"LICENSE"
+			]
+		]
+	end
 end

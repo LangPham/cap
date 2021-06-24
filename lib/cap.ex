@@ -18,8 +18,16 @@ defmodule Cap do
 		end
 	end
 	
-	def sign_in(conn, model) do
-		string = "id#{model.id},role#{model.role}"
+	@doc """
+	Call sign_in in controller login to put session.
+	
+  ## Example
+	
+      Cap.sign_in(conn, id, role)
+
+	"""
+	def sign_in(conn, id, role) do
+		string = "id#{id},role#{role}"
 		ci = Cap.Crypto.encrypt(string)
 		conn
 		|> put_session(:cap, ci)

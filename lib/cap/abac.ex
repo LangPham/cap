@@ -1,5 +1,14 @@
 defmodule Cap.Abac do
 	
+	@doc """
+	ABAC is Attribute-Based Access ControlCall, check owner of resource.
+	Return true of false
+	
+  ## Example
+	
+      apply_abac(req, resource)
+	
+	"""
 	def apply_abac(req, resource)do
 		list_check = [:show, :edit, :update, :delete]
 		if req.plug_opts in list_check do
