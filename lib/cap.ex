@@ -4,7 +4,7 @@ defmodule Cap do
 	Documentation for `Cap`.
 	"""
 	use Plug.Builder
-	alias Cap.{Rbac, Abac}
+	alias Cap.{Rbac, Abac, Crypto}
 	
 	def init(opts) do
 		Keyword.merge(Application.get_all_env(:cap), opts)
@@ -27,10 +27,34 @@ defmodule Cap do
 
 	"""
 	def sign_in(conn, id, role) do
-		string = "id#{id},role#{role}"
-		ci = Cap.Crypto.encrypt(string)
+		string = %{id: id, role: role}
 		conn
-		|> put_session(:cap, ci)
+		|> put_session(:cap, string)
+		|> configure_session(renew: true)
+	end
+	
+	@doc """
+	Call sign_in in controller login to put session.
+	
+  ## Example
+	
+      Cap.verify_pwd("password", "PaBY3nqBM8n+//wqJJhPFd++XI/iMdX5vHcf8W3dJIM")
+			true
+	"""
+	def verify_pwd(pass, hash) do
+		Crypto.verify_sha(pass, hash)
+	end
+	
+	@doc """
+	Call sign_in in controller login to put session.
+	
+  ## Example
+	
+      Cap.hash_pwd("password")
+			"PaBY3nqBM8n+//wqJJhPFd++XI/iMdX5vHcf8W3dJIM"
+	"""
+	def hash_pwd(pass, hash) do
+		Crypto.encrypt_sha(pass)
 	end
 	
 	defp apply_cap(conn, config)do
@@ -66,10 +90,7 @@ defmodule Cap do
 		cap = get_session(conn, :cap)
 		case cap do
 			nil -> %{id: nil, role: "nil"}
-			_ ->
-				string_model = Cap.Crypto.decrypt(cap)
-				Regex.named_captures(~r/id(?<id>\d+),role(?<role>[[:alnum:]]+)/, string_model)
-				|> Enum.into(%{}, fn {k, v} -> {String.to_atom(k), v} end)
+			_ -> cap
 		end
 	end
 end

@@ -26,4 +26,19 @@ defmodule Cap.Crypto do
 		<<iv :: binary - 32, tag :: binary - 16, ct :: binary>> = Base.decode64!(cipher)
 		:crypto.block_decrypt(:aes_gcm, key, iv, {"AES128GCM", ct, tag})
 	end
+	
+	def encrypt_sha(data) do
+		key = Application.get_env(:cap, :secret_key)
+		:crypto.mac(:hmac, :sha256, key, data)
+		|> Base.encode64(padding: false)
+	end
+	
+	def verify_sha(data, hash) do
+		key = Application.get_env(:cap, :secret_key)
+		hmac =
+			:crypto.mac(:hmac, :sha256, key, data)
+			|> Base.encode64(padding: false)
+		hmac == hash
+	end
+
 end
