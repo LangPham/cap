@@ -85,8 +85,16 @@ defmodule Cap do
 			_ -> raise Cap.ErrorHandler, "403"
 		end
 	end
-	
-	defp get_resource(conn) do
+
+	@doc """
+	Call sign_in in controller login to put session.
+
+  ## Example
+
+      Cap.get_resource(conn)
+			%{id: 1, role: "ROOT"}
+	"""
+	def get_resource(conn) do
 		cap = get_session(conn, :cap)
 		case cap do
 			nil -> %{id: nil, role: "nil"}
