@@ -11,7 +11,7 @@ Add the package as a dependency in your Elixir project using something along the
 ```elixir
 def deps do
   [
-    {:cap, "~> 0.1.1"}
+    {:cap, "~> 0.2.0"}
   ]
 end
 ```
