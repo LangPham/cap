@@ -2,13 +2,13 @@ defmodule Cap.MixProject do
 	use Mix.Project
 	
 	@source_url "https://github.com/LangPham/cap"
-	@version "0.1.2"
+	@version "0.2.0"
 	
 	def project do
 		[
 			app: :cap,
 			version: @version,
-			elixir: "~> 1.11",
+			elixir: "~> 1.12",
 			start_permanent: Mix.env() == :prod,
 			deps: deps(),
 			
@@ -42,7 +42,7 @@ defmodule Cap.MixProject do
 	# Run "mix help deps" to learn about dependencies.
 	defp deps do
 		[
-			{:phoenix, "~> 1.5.7"},
+			{:phoenix, "~> 1.6"},
 			{:ex_doc, "~> 0.24", only: :dev, runtime: false}
 		]
 	end
