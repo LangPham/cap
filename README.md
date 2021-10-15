@@ -11,7 +11,7 @@ Add the package as a dependency in your Elixir project using something along the
 ```elixir
 def deps do
   [
-    {:cap, "~> 0.2.0"}
+    {:cap, "~> 0.2"}
   ]
 end
 ```
@@ -43,7 +43,7 @@ config :cap,
          },
        },
        # secret_key for encrypt, decrypt value in session
-       secret_key: "AMlTnnYyOp3EWUbwSTawScMyF9IQoVYs" 
+       secret_key: "h25R39fifOx449BCv084I9ksl/WA3Xi5" 
 ```
 
 Add plug to scope in pipeline
