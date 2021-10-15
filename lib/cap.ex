@@ -35,26 +35,24 @@ defmodule Cap do
   end
 
   @doc """
-  Call sign_in in controller login to put session.
+  Verify password.
 
-   ## Example
-
-       Cap.verify_pwd("password", "PaBY3nqBM8n+//wqJJhPFd++XI/iMdX5vHcf8W3dJIM")
-  		true
+  ## Example
+      iex>  Cap.verify_pwd("password", "9+757UiM5YnNcyQKtgCPx9IJb2pjv8sJgxCBQqC9kX0")
+      true
   """
   def verify_pwd(pass, hash) do
     Crypto.verify_sha(pass, hash)
   end
 
   @doc """
-  Call sign_in in controller login to put session.
+  Hash password.
 
-   ## Example
-
-       Cap.hash_pwd("password")
-  		"PaBY3nqBM8n+//wqJJhPFd++XI/iMdX5vHcf8W3dJIM"
+  ## Example
+      iex>  Cap.hash_pwd("password")
+      "9+757UiM5YnNcyQKtgCPx9IJb2pjv8sJgxCBQqC9kX0"
   """
-  def hash_pwd(pass, hash) do
+  def hash_pwd(pass) do
     Crypto.encrypt_sha(pass)
   end
 
@@ -90,12 +88,12 @@ defmodule Cap do
   end
 
   @doc """
-  Call sign_in in controller login to put session.
+  Get resource.
 
-   ## Example
+  ## Example
 
-       Cap.get_resource(conn)
-  		%{id: 1, role: "ROOT"}
+      Cap.get_resource(conn)
+  	  %{id: 1, role: "ROOT"}
   """
   def get_resource(conn) do
     cap = get_session(conn, :cap)
